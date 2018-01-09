@@ -106,7 +106,7 @@ class GenericOAuthenticator(OAuthenticator):
         try:
             resp = yield http_client.fetch(req)
             print(resp.body)
-        except httpclient.HTTPError as e:
+        except http_client.HTTPError as e:
             # HTTPError is raised for non-200 responses; the response
             # can be found in e.response.
             app_log.error("Error during POST to OAuth provider token endpoint: %s", e)
