@@ -9,6 +9,7 @@ import base64
 import urllib
 
 from tornado.auth import OAuth2Mixin
+from tornado.log import app_log
 from tornado import gen, web
 
 from tornado.httputil import url_concat
@@ -97,7 +98,11 @@ class GenericOAuthenticator(OAuthenticator):
                           headers=headers,
                           body=urllib.parse.urlencode(params)  # Body is required for a POST...
                           )
-
+        
+        app_log.info("About to make HTTP %s to url %s", req.method, req.url)
+        app_log.info("Headers are: %s", req.headers)
+        app_log.info("Body is: %s", req.body)
+        
         resp = yield http_client.fetch(req)
 
         resp_json = json.loads(resp.body.decode('utf8', 'replace'))
