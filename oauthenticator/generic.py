@@ -93,7 +93,7 @@ class GenericOAuthenticator(OAuthenticator):
         '''
         
         headers = {
-            "Accept": "application/x-www-form-urlencoded",
+            "Content-Type": "application/x-www-form-urlencoded",
             "User-Agent": "JupyterHub"
             #"Authorization": "Basic {}".format(b64key.decode("utf8"))
         }
