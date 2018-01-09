@@ -111,7 +111,7 @@ class GenericOAuthenticator(OAuthenticator):
             # can be found in e.response.
             app_log.error("Error during POST to OAuth provider token endpoint: %s", e)
             app_log.error("Full response was: %s", e.response)
-            throw
+            raise e
         
         resp_json = json.loads(resp.body.decode('utf8', 'replace'))
 
