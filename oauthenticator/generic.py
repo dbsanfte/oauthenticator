@@ -100,7 +100,7 @@ class GenericOAuthenticator(OAuthenticator):
         req = HTTPRequest(url,
                           method="POST",
                           headers=headers,
-                          body=urllib.parse.urlencode(params)  # Body is required for a POST...
+                          body=urllib.urlencode(params)  # Body is required for a POST...
                           )
         
         app_log.info("About to make HTTP %s to url %s", req.method, req.url)
