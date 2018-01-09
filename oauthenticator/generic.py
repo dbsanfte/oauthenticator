@@ -93,7 +93,7 @@ class GenericOAuthenticator(OAuthenticator):
         '''
         
         headers = {
-            "Accept": "application/json",
+            "Accept": "application/x-www-form-urlencoded",
             "User-Agent": "JupyterHub"
             #"Authorization": "Basic {}".format(b64key.decode("utf8"))
         }
@@ -132,8 +132,7 @@ class GenericOAuthenticator(OAuthenticator):
 
         req = HTTPRequest(url,
                           method=self.userdata_method,
-                          headers=headers,
-                          )
+                          headers=headers)
         resp = yield http_client.fetch(req)
         resp_json = json.loads(resp.body.decode('utf8', 'replace'))
 
