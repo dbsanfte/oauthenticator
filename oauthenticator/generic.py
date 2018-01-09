@@ -78,7 +78,8 @@ class GenericOAuthenticator(OAuthenticator):
             code=code,
             grant_type='authorization_code',
             client_id=self.client_id,
-            client_secret=self.client_secret
+            client_secret=self.client_secret,
+            resource='http://jupyterhub/'
         )
 
         url = self.token_url
