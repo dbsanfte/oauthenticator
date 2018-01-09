@@ -83,24 +83,18 @@ class GenericOAuthenticator(OAuthenticator):
 
         url = self.token_url
         
-        '''
-        b64key = base64.b64encode(
-            bytes(
-                "{}:{}".format(self.client_id, self.client_secret),
-                "utf8"
-            )
-        )
-        '''
-        
         headers = {
             "Content-Type": "application/x-www-form-urlencoded",
             "User-Agent": "JupyterHub"
             #"Authorization": "Basic {}".format(b64key.decode("utf8"))
         }
+        
+        data = urllib.parse.urlencode(params, doseq=True, encoding='utf-8', safe='=')
+        
         req = HTTPRequest(url,
                           method="POST",
                           headers=headers,
-                          body=urllib.urlencode(params)  # Body is required for a POST...
+                          body=data 
                           )
         
         app_log.info("About to make HTTP %s to url %s", req.method, req.url)
