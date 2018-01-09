@@ -76,22 +76,26 @@ class GenericOAuthenticator(OAuthenticator):
         params = dict(
             redirect_uri=self.get_callback_url(handler),
             code=code,
-            grant_type='authorization_code'
+            grant_type='authorization_code',
+            client_id=self.client_id,
+            client_secret=self.client_secret
         )
 
         url = self.token_url
-
+        
+        '''
         b64key = base64.b64encode(
             bytes(
                 "{}:{}".format(self.client_id, self.client_secret),
                 "utf8"
             )
         )
-
+        '''
+        
         headers = {
             "Accept": "application/json",
-            "User-Agent": "JupyterHub",
-            "Authorization": "Basic {}".format(b64key.decode("utf8"))
+            "User-Agent": "JupyterHub"
+            #"Authorization": "Basic {}".format(b64key.decode("utf8"))
         }
         req = HTTPRequest(url,
                           method="POST",
